@@ -74,6 +74,20 @@ def get_temps
   temps
 end
 
+def get_power
+  power = []
+  power_name = 'Volt'
+  power_value = `cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage0_input | tr -d '\n'`
+  power.push({:id=>0, :power_name=>power_name, :power_value=>power_value})
+  power_name = 'Ampere'
+  power_value = `cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_current0_input | tr -d '\n'`
+  power.push({:id=>1, :power_name=>power_name, :power_value=>power_value})
+  power_name = 'Watt'
+  power_value = `cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power0_input | tr -d '\n'`
+  power.push({:id=>2, :power_name=>power_name, :power_value=>power_value})
+  power
+end
+
 def get_pipelines()
   pipelines = []
   pipelines += Dir["#{$setup['belacoder_path']}/pipeline/jetson/*"].sort if $setup['hw'] == 'jetson'
@@ -153,7 +167,7 @@ get '/update' do
 end
 
 get '/data' do
-  all_data = { :active=>is_active, :modems=>get_modems, :temps=>get_temps}
+  all_data = { :active=>is_active, :modems=>get_modems, :temps=>get_temps, :power=>get_power}
   json all_data
 end
 
