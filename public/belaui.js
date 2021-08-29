@@ -105,6 +105,52 @@ var bitrateChart = new Chart(
 	document.getElementById('bitrateChart'),
 	config_bitrate
 );
+/** power **/
+const labels_power = [];
+for (let i = 0; i < DATA_COUNT; ++i) {
+  labels_power.push(i.toString());
+}
+const data_power = {
+  labels: labels_power,
+  datasets: []
+};
+const config_power = {
+  type: 'line',
+  data: data_power,
+  options: {
+	responsive: true,
+	plugins: {
+	  legend: {
+		position: 'bottom',
+	  },
+	  title: {
+		display: true,
+		text: 'Power Graph by m_o_o_'
+	  }
+	},
+	scales: {
+	  x: {
+		display: true,
+		title: {
+		  display: true
+		}
+	  },
+	  y: {
+		display: true,
+		title: {
+		  display: true,
+		  text: '°C'
+		},
+		suggestedMin: 1,
+		suggestedMax: 5
+	  }
+	}
+  },
+};
+var powerChart = new Chart(
+	document.getElementById('powerChart'),
+	config_power
+);
 /** temperature **/
 const labels_temp = [];
 for (let i = 0; i < DATA_COUNT; ++i) {
@@ -170,6 +216,17 @@ $.getJSON("/data", function(data) {
 	 });
 	bitrateChart.update(); 
 	last_modem = data;
+	/** power **/
+	data.power.forEach((item, index) => {
+		powerval = item.power_value / 1000;
+		powerChart.data.datasets[index] = {
+			label: `(${item.id}) ${item.power_name}`,
+			backgroundColor: `rgb(0, ${getRandomInt(0,255)}, ${getRandomInt(0,255)})`,
+			borderColor: `rgb(0, ${getRandomInt(0,255)}, ${getRandomInt(0,255)})`,
+			data: [powerval],
+		  };
+	});
+	powerChart.update();
 	/** temperature **/
 	data.temps.forEach((item, index) => {
 		tempval = item.type_value / 1000;
@@ -198,6 +255,17 @@ $.getJSON("/data", function(data) {
 		 });
 		 bitrateChart.update(); 
 		 last_modem = data.modems;
+		 /** power **/
+		 data.power.forEach((item, index) => {
+			//console.log(tempChart.data.datasets[index].data);
+			powerval = item.power_value / 1000;
+			if(powerChart.data.datasets[index].data.length >= DATA_COUNT)
+			{
+				powerChart.data.datasets[index].data.shift();
+			}
+			powerChart.data.datasets[index].data.push(powerval);
+		 });
+		 powerChart.update(); 
 		 /** temperature **/
 		 data.temps.forEach((item, index) => {
 			//console.log(tempChart.data.datasets[index].data);
