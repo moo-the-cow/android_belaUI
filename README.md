@@ -3,7 +3,4 @@ Web interface for BELABOX
 
 how to update your belaUI
 
-simply type
-```
-chmod +x ~/belaUI/update_belaui.sh && sh ~/belaUI/update_belaui.sh
-```
+just press the UPDATE button on your BelaUI when you're connected to the internet
