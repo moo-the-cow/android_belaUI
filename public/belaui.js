@@ -16,6 +16,11 @@ else if(window.location.hash.substring(1) == "graph-bitrate")
 	$('#content').hide();
 	$('#bitrateChart').appendTo('body');
 }
+else if(window.location.hash.substring(1) == "graph-power")
+{
+	$('#content').hide();
+	$('#powerChart').appendTo('body');
+}
 
 /* translation */
 $("#language > option[value="+config["lang"]+"]").attr('selected','');
