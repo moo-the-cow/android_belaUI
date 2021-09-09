@@ -150,6 +150,7 @@ def update_bela()
     `chmod +x update_belaui.sh && sh update_belaui.sh`
 	update_result += "belaUI "
   end
+  `chmod +x update_srtla.sh && sh update_srtla.sh`
   if(update_result == "")
     update_result = "no updates available"
   else
