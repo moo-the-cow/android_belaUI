@@ -132,11 +132,11 @@ def update_bela()
     belacoder_version_remote = JSON.parse Net::HTTP.get_response(URI.parse(('https://raw.githubusercontent.com/moo-the-cow/belacoder/master/version.json'))).body
 	belacoder_version_local = JSON.parse open('../belacoder/version.json').read
 	if(belacoder_version_local != belacoder_version_remote)
-      `chmod +x ../belacoder/update_belacoder.sh && sh ../belacoder/update_belacoder.sh`
+      `chmod +x update_belacoder.sh && sh update_belacoder.sh`
 	  update_result += "belacoder "
 	end
   else
-    `chmod +x ../belacoder/update_belacoder.sh && sh ../belacoder/update_belacoder.sh`
+    `chmod +x update_belacoder.sh && sh update_belacoder.sh`
 	update_result += "belacoder "
   end
   if(File.file?('version.json'))
@@ -168,7 +168,7 @@ def rollback_bela()
     `chmod +x rollback_srtla.sh && sh rollback_srtla.sh`
   end
   if(File.directory?(('../belacoder_lastversion')))
-    `cd ../belacoder && chmod +x rollback.sh && sh rollback.sh`
+    `chmod +x rollback_belacoder.sh && sh rollback_belacoder.sh`
   end
   return "rollback done"
 end
