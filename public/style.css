@@ -44,3 +44,26 @@ div#overlayText {
 #errorMsg {
   display: none;
 }
+@media screen and (prefers-color-scheme: dark) {
+	body {
+	  background-color: black;
+	  color: white;
+	}
+	.table thead
+	{
+		color: #5fafff;
+	}
+	.table tbody
+	{
+		color: white;
+	}
+	.card
+	{
+		background-color: #202020;
+	}
+	.form-control, .form-control[readonly], .custom-select
+	{
+		background-color: #363736;
+		color: white;
+	}
+}
