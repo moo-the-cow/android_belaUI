@@ -20,5 +20,6 @@
   "srt-latency":"SRT 遅延",
   "update": "アップデート",
   "power-off": "電源オフ",
-  "restart" : "再起動"
+  "restart" : "再起動",
+  "rollback" : "リストア"
 }

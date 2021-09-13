@@ -302,6 +302,9 @@ async function send_command(cmd) {
 	  case 'update':
         show_overlay(response_data);
         break;
+      case 'rollback':
+        show_overlay(response_data);
+        break;
       case 'reboot':
         show_overlay('Restarting...');
         break;

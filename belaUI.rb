@@ -159,8 +159,23 @@ def update_bela()
   return update_result
 end
 
+def rollback_bela()
+  update_result = ""
+  if(File.directory?(('../belaUI_lastversion')))
+    `chmod +x rollback.sh && sh rollback.sh`
+	update_result = "rollback to last version done"
+  else
+	update_result = "rollback not needed"
+  end
+  return update_result
+end
+
 get '/' do
   send_file File.expand_path('index.html', settings.public_folder)
+end
+
+get '/rollback' do
+  json rollback_bela
 end
 
 get '/update' do
@@ -274,13 +289,17 @@ post '/bitrate' do
 end
 
 post '/command' do
-  error 400 unless ["poweroff", "reboot", "update"].include?(params[:cmd])
-  if(params[:cmd] == "update")
+  error 400 unless ["poweroff", "reboot", "update", "rollback"].include?(params[:cmd])
+  if params[:cmd] == "update"
     json update_bela
-  else
-    fork { sleep 1 and exec(params[:cmd]) }
-    json true
+	return
   end
+  if params[:cmd] == "rollback"
+    json rollback_bela
+	return
+  end
+  fork { sleep 1 and exec(params[:cmd]) }
+  json true
 end
 
 get '/generate_204' do

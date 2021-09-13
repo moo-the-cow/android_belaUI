@@ -20,5 +20,6 @@
   "srt-latency":"SRT latency",
   "update": "Update",
   "power-off": "Power Off",
-  "restart" : "Restart"
+  "restart" : "Restart",
+  "rollback" : "Rollback"
 }
