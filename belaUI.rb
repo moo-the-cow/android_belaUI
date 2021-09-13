@@ -163,11 +163,14 @@ def rollback_bela()
   update_result = ""
   if(File.directory?(('../belaUI_lastversion')))
     `chmod +x rollback.sh && sh rollback.sh`
-	update_result = "rollback to last version done"
-  else
-	update_result = "rollback not needed"
   end
-  return update_result
+  if(File.directory?(('../srtla_lastversion')))
+    `chmod +x rollback_srtla.sh && sh rollback_srtla.sh`
+  end
+  if(File.directory?(('../belacoder_lastversion')))
+    `cd ../belacoder && chmod +x rollback.sh && sh rollback.sh`
+  end
+  return "rollback done"
 end
 
 get '/' do
