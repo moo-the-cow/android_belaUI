@@ -37,10 +37,6 @@ div#overlayText {
   color: #EEE;
 }
 
-#refreshBtn {
-  display: none;
-}
-
 #errorMsg {
   display: none;
 }
@@ -66,4 +62,8 @@ div#overlayText {
 		background-color: #363736;
 		color: white;
 	}
+  .modal-content
+  {
+    background-color: #363736;
+  }
 }

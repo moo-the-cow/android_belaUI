@@ -289,18 +289,42 @@ function show_overlay(title, text) {
   $('#centeredModal').modal('show');
 }
 
-async function send_command(cmd) {
+function send_command(cmd) {
+  /*
   let formBody = new URLSearchParams();
   formBody.set("cmd", cmd);
-
+  */
+  /*
   const response = await fetch("/command", {
     method: "POST",
     body: formBody,
   });
-  
-  response_json = response.json();
-  response_data = response_json.data;
-
+  */
+  console.log(cmd);
+  $.post("/command", {"cmd":cmd}, function( data ) {
+    switch(cmd) {
+      case 'test':
+        show_overlay('Test','BLA BLA');
+        break;
+	    case 'update':
+        show_overlay(currentLanguageData["update"], data);
+        break;
+      case 'rollback':
+        show_overlay(currentLanguageData["rollback"], data);
+        break;
+      case 'reboot':
+        show_overlay(currentLanguageData["restart"], 'Restarting...');
+        break;
+      case 'mm':
+        show_overlay(currentLanguageData["power-off"], 'Powered off');
+        break;
+    }
+  });
+  /*
+  let response_json = response.json();
+  let response_data = response_json.data;
+  */
+/*
   if (response.ok) {
     //clearInterval(update_timer);
     switch(cmd) {
@@ -320,7 +344,9 @@ async function send_command(cmd) {
         show_overlay(currentLanguageData["power-off"], 'Powered off');
         break;
     }
+    
   }
+  */
 }
 
 document.getElementById("startStop").addEventListener("click", () => {
