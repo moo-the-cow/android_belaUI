@@ -1,198 +1,191 @@
+
+
 <!--
-    belaUI - web UI for the BELABOX project
-    Copyright (C) 2020-2021 BELABOX project
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+   belaUI - web UI for the BELABOX project
+   Copyright (C) 2020-2021 BELABOX project
+   
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <link rel="stylesheet" href="/bootstrap.min.css" />
-    <link rel="stylesheet" href="/jquery-ui-1.12.1.css" />
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-	<div id="content">
+	<head>
+		<title>BelaUI by m_o_o_</title>
+		<meta charset="utf-8" />
+		<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link rel="stylesheet" href="/bootstrap.min.css" />
+		<link rel="stylesheet" href="/jquery-ui-1.12.1.css" />
+		<link rel="stylesheet" href="/style.css" />
+	</head>
+	<body>
+		<div id="content">
 		<div class="container mt-4" style="max-width: 700px">
-
-		  <div class="alert alert-danger alert-dismissible show" role="alert" id="errorMsg">
-			<span></span>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div> <!-- .alert -->
-		  
+			<div class="alert alert-danger alert-dismissible show" role="alert" id="errorMsg">
+				<span></span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<!-- .alert -->
 			<label for="language" data-lang="language">Language</label>
 			<select id="language">
 				<option value="en">english</option>
 				<option value="ja">日本語</option>
 			</select>
 			<br/>
-
-		  <div class="mb-4">
-			<button type="button" id="startStop" class="btn btn-lg btn-block mb-2" data-lang="start">
-			  Start
-			</button>
-
-			<div class="form-group">
-			  <input type="text" id="bitrateValues" class="slider-values form-control" readonly/>
-			  <div id="bitrateSlider" class="slider mt-2"></div>
+			<div class="mb-4">
+				<button type="button" id="startStop" class="btn btn-lg btn-block mb-2" data-lang="start">Start</button>
+				<div class="form-group">
+					<input type="text" id="bitrateValues" class="slider-values form-control" readonly/>
+					<div id="bitrateSlider" class="slider mt-2"></div>
+				</div>
 			</div>
-		  </div> <!-- .mb-4 -->
-
-		  <table class="table mb-4">
-			<thead>
-			  <tr>
-				<th scope="col" data-lang="port">Port</th>
-				<th scope="col" data-lang="ip">IP</th>
-				<th scope="col" class="col-6" data-lang="bitrate">Bitrate</th>
-			  </tr>
-			</thead>
-			<tbody id="modems"></tbody>
-		  </table>
-		  
-		  <canvas id="bitrateChart" width="400" height="400"></canvas>
-		  
-		  <table class="table mb-4">
-			<thead>
-			  <tr>
-				<th scope="col">ID</th>
-				<th scope="col">Name</th>
-				<th scope="col" class="col-6" data-lang="power">Power</th>
-			  </tr>
-			</thead>
-			<tbody id="power"></tbody>
-		  </table>
-		  
-		  <canvas id="powerChart" width="400" height="400"></canvas>
-		  
-		  <table class="table mb-4">
-			<thead>
-			  <tr>
-				<th scope="col">ID</th>
-				<th scope="col">Name</th>
-				<th scope="col" class="col-6" data-lang="temperature">Temperature</th>
-			  </tr>
-			</thead>
-			<tbody id="temps"></tbody>
-		  </table>
-		  
-		  <canvas id="tempChart" width="400" height="400"></canvas>
-
-		  <div id="settings">
-			<div class="card mb-2">
-			  <div class="card-header bg-success text-center" type="button"
-				   data-toggle="collapse" data-target="#collapseOne">
-				<button class="btn btn-link text-white" type="button" data-toggle="collapse"
-						data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-lang="encoder-settings">
-				  Encoder settings
-				</button>
-			  </div> <!-- card-header -->
-
-			  <div class="collapse" id="collapseOne">
-				<div class="card-body">
-				  <div class="form-group">
-					<select class="custom-select" name="pipelines" id="pipelines"></select>
-				  </div>
-				  <div id="delay" class="form-group">
-					<input type="text" id="delayValue" class="slider-values form-control" readonly/>
-					<div id="delaySlider" class="slider mt-2"></div>
-				  </div>
-				</div> <!-- .card-body -->
-			  </div> <!-- .collapse -->
-			</div> <!-- .card -->
-
-			<div class="card mb-2">
-			  <div class="card-header bg-success text-center" type="button"
-				   data-toggle="collapse" data-target="#collapseTwo">
-				<button class="btn btn-link text-white" type="button" data-toggle="collapse"
-				  data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-lang="srtla-settings">
-				  SRTLA settings
-				</button>
-			  </div> <!-- .card-header -->
-
-			  <div class="collapse" id="collapseTwo">
-				<div class="card-body">
-				  <div class="form-group">
-					<label for="srtlaAddr" data-lang="srtla-receiver-address">SRTLA receiver address</label>
-					<input type="text" class="form-control" id="srtlaAddr" />
-				  </div>
-				  <div class="form-group">
-					<label for="srtlaPort" data-lang="srtla-receiver-port">SRTLA receiver port</label>
-					<input type="text" class="form-control" id="srtlaPort" />
-				  </div>
-				  <div class="form-group">
-					<label for="srtStreamid" data-lang="srt-streamid">SRT streamid</label>
-					<input type="text" class="form-control" id="srtStreamid" />
-				  </div>
-				  <div class="form-group">
-					<input type="text" id="srtLatencyValue" class="slider-values form-control" readonly/>
-					<div id="srtLatencySlider" class="slider mt-2"></div>
-				  </div>
-				</div> <!-- .card-body -->
-			  </div> <!-- .collapse -->
-			</div> <!-- .card -->
-
-			<div class="card mb-2">
-			  <div class="card-header bg-success text-center" type="button"
-				   data-toggle="collapse" data-target="#collapseThree">
-				<button class="btn btn-link text-white" type="button" data-toggle="collapse"
-						data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-lang="system">
-				  System
-				</button>
-			  </div> <!-- card-header -->
-
-			  <div class="collapse" id="collapseThree">
-				<div class="card-body">
-				<button type="button" id="update" class="btn btn-block btn-danger command-btn" data-lang="update">
-					Update
-				  </button>
-				  <button type="button" id="rollback" class="btn btn-block btn-danger command-btn" data-lang="rollback">
-					Rollback
-				  </button>
-				  <button type="button" id="poweroff" class="btn btn-block btn-danger command-btn" data-lang="power-off">
-					Power off
-				  </button>
-				  <button type="button" id="reboot" class="btn btn-block btn-danger command-btn" data-lang="restart">
-					Restart
-				  </button>
-				</div> <!-- .card-body -->
-			  </div> <!-- .collapse -->
-			</div> <!-- .card -->
-
-		  </div> <!-- #settings -->
-		</div> <!-- .container -->
-
-		<div class="overlay" id="overlayBG"></div>
-		<div class="overlay" id="overlayText">
-		  <p></p>
-		  <button type="button" id="refreshBtn" class="btn btn-lg btn-light" data-lang="refresh">Refresh</button>
+			<!-- .mb-4 -->
+			<table class="table mb-4">
+				<caption>Network</caption>
+				<thead>
+					<tr>
+					<th scope="col" data-lang="port">Port</th>
+					<th scope="col" data-lang="ip">IP</th>
+					<th scope="col" class="col-6" data-lang="bitrate">Bitrate</th>
+					</tr>
+				</thead>
+				<tbody id="modems"></tbody>
+			</table>
+			<canvas id="bitrateChart" width="400" height="400"></canvas>
+			<table class="table mb-4">
+				<caption>Power</caption>
+				<thead>
+					<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col" class="col-6" data-lang="power">Power</th>
+					</tr>
+				</thead>
+				<tbody id="power"></tbody>
+			</table>
+			<canvas id="powerChart" width="400" height="400"></canvas>
+			<table class="table mb-4">
+				<caption>Temperature</caption>
+				<thead>
+					<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col" class="col-6" data-lang="temperature">Temperature</th>
+					</tr>
+				</thead>
+				<tbody id="temps"></tbody>
+			</table>
+			<canvas id="tempChart" width="400" height="400"></canvas>
+			<div id="settings">
+				<div class="card mb-2">
+					<div class="card-header bg-success text-center" type="button"
+					data-toggle="collapse" data-target="#collapseOne">
+					<button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" data-lang="encoder-settings">Encoder settings</button>
+					</div>
+					<!-- card-header -->
+					<div class="collapse" id="collapseOne">
+					<div class="card-body">
+						<div class="form-group">
+							<select class="custom-select" name="pipelines" id="pipelines"></select>
+						</div>
+						<div id="delay" class="form-group">
+							<input type="text" id="delayValue" class="slider-values form-control" readonly/>
+							<div id="delaySlider" class="slider mt-2"></div>
+						</div>
+					</div>
+					<!-- .card-body -->
+					</div>
+					<!-- .collapse -->
+				</div>
+				<!-- .card -->
+				<div class="card mb-2">
+					<div class="card-header bg-success text-center" type="button" data-toggle="collapse" data-target="#collapseTwo">
+						<button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" data-lang="srtla-settings">SRTLA settings</button>
+					</div>
+					<!-- .card-header -->
+					<div class="collapse" id="collapseTwo">
+					<div class="card-body">
+						<div class="form-group">
+							<label for="srtlaAddr" data-lang="srtla-receiver-address">SRTLA receiver address</label>
+							<input type="text" class="form-control" id="srtlaAddr" />
+						</div>
+						<div class="form-group">
+							<label for="srtlaPort" data-lang="srtla-receiver-port">SRTLA receiver port</label>
+							<input type="text" class="form-control" id="srtlaPort" />
+						</div>
+						<div class="form-group">
+							<label for="srtStreamid" data-lang="srt-streamid">SRT streamid</label>
+							<input type="text" class="form-control" id="srtStreamid" />
+						</div>
+						<div class="form-group">
+							<input type="text" id="srtLatencyValue" class="slider-values form-control" readonly/>
+							<div id="srtLatencySlider" class="slider mt-2"></div>
+						</div>
+					</div>
+					<!-- .card-body -->
+					</div>
+					<!-- .collapse -->
+				</div>
+				<!-- .card -->
+				<div class="card mb-2">
+					<div class="card-header bg-success text-center" type="button"
+					data-toggle="collapse" data-target="#collapseThree">
+					<button class="btn btn-link text-white" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" data-lang="system">System</button>
+					</div>
+					<!-- card-header -->
+					<div class="collapse" id="collapseThree">
+					<div class="card-body">
+						<button type="button" id="update" class="btn btn-block btn-danger command-btn" data-lang="update">Update</button>
+						<button type="button" id="rollback" class="btn btn-block btn-danger command-btn" data-lang="rollback">Rollback</button>
+						<button type="button" id="poweroff" class="btn btn-block btn-danger command-btn" data-lang="power-off">Power off</button>
+						<button type="button" id="reboot" class="btn btn-block btn-danger command-btn" data-lang="restart">Restart</button>
+					</div>
+					<!-- .card-body -->
+					</div>
+					<!-- .collapse -->
+				</div>
+				<!-- .card -->
+			</div>
+			<!-- #settings -->
 		</div>
-	</div>
-
-    <script type="text/javascript" src="/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="/jquery-ui-1.12.1.js"></script>
-    <script type="text/javascript" src="/jquery.ui.touch-punch.js"></script>
-    <script type="text/javascript" src="/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="/script.js"></script>
-	<script type="text/javascript" src="/chart.min.js"></script>
-	<script type="text/javascript" src="/belaui.js"></script>
-  </body>
+		<!-- .container -->
+		<!-- Modal -->
+		<div class="modal fade" id="centeredModal" tabindex="-1" role="dialog" aria-labelledby="centeredModalTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="centeredModalLongTitle"></h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" id="refreshBtn" class="btn btn-primary btn-lg btn-light" data-lang="refresh">Refresh</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script type="text/javascript" src="/jquery-3.5.1.js"></script>
+		<script type="text/javascript" src="/jquery-ui-1.12.1.js"></script>
+		<script type="text/javascript" src="/jquery.ui.touch-punch.js"></script>
+		<script type="text/javascript" src="/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript" src="/script.js"></script>
+		<script type="text/javascript" src="/chart.min.js"></script>
+		<script type="text/javascript" src="/belaui.js"></script>
+	</body>
 </html>

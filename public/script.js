@@ -276,12 +276,17 @@ async function stop() {
   }
 }
 
-function show_overlay(text) {
+function show_overlay(title, text) {
+  /*
   $('#overlayText p').text(text);
   $('.overlay').show();
   setTimeout(function(){
     $('#refreshBtn').show();
   }, 2000);
+  */
+  $('#centeredModalLongTitle').text(title);
+  $('#centeredModal .modal-body').text(text);
+  $('#centeredModal').modal('show');
 }
 
 async function send_command(cmd) {
@@ -297,19 +302,22 @@ async function send_command(cmd) {
   response_data = response_json.data;
 
   if (response.ok) {
-    clearInterval(update_timer);
+    //clearInterval(update_timer);
     switch(cmd) {
-	  case 'update':
-        show_overlay(response_data);
+      case 'test':
+        show_overlay('Test','BLA BLA');
+        break;
+	    case 'update':
+        show_overlay(currentLanguageData["update"], response_data);
         break;
       case 'rollback':
-        show_overlay(response_data);
+        show_overlay(currentLanguageData["rollback"], response_data);
         break;
       case 'reboot':
-        show_overlay('Restarting...');
+        show_overlay(currentLanguageData["restart"], 'Restarting...');
         break;
       case 'mm':
-        show_overlay('Powered off');
+        show_overlay(currentLanguageData["power-off"], 'Powered off');
         break;
     }
   }
