@@ -294,12 +294,10 @@ end
 post '/command' do
   error 400 unless ["poweroff", "reboot", "update", "rollback"].include?(params[:cmd])
   if params[:cmd] == "update"
-    json update_bela
-	return
+    return json update_bela
   end
   if params[:cmd] == "rollback"
-    json rollback_bela
-	return
+    return json rollback_bela
   end
   fork { sleep 1 and exec(params[:cmd]) }
   json true
