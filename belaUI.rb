@@ -159,7 +159,7 @@ def update_bela()
     end
   else
     `chmod +x update_srtla.sh && sh update_srtla.sh`
-    update_result += "belacoder "
+    update_result += "srtla "
   end
   if(update_result == "")
     update_result = "no updates available"
