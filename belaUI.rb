@@ -130,27 +130,37 @@ def update_bela()
   update_result = ""
   if(File.file?('../belacoder/version.json'))
     belacoder_version_remote = JSON.parse Net::HTTP.get_response(URI.parse(('https://raw.githubusercontent.com/moo-the-cow/belacoder/master/version.json'))).body
-	belacoder_version_local = JSON.parse open('../belacoder/version.json').read
-	if(belacoder_version_local != belacoder_version_remote)
+    belacoder_version_local = JSON.parse open('../belacoder/version.json').read
+    if(belacoder_version_local != belacoder_version_remote)
       `chmod +x update_belacoder.sh && sh update_belacoder.sh`
-	  update_result += "belacoder "
-	end
+      update_result += "belacoder "
+    end
   else
     `chmod +x update_belacoder.sh && sh update_belacoder.sh`
-	update_result += "belacoder "
+    update_result += "belacoder "
   end
   if(File.file?('version.json'))
     belaui_version_remote = JSON.parse Net::HTTP.get_response(URI.parse(('https://raw.githubusercontent.com/moo-the-cow/belaUI/main/version.json'))).body
-	belaui_version_local = JSON.parse open('version.json').read
-	if(belaui_version_local != belaui_version_remote)
+    belaui_version_local = JSON.parse open('version.json').read
+    if(belaui_version_local != belaui_version_remote)
       `chmod +x update_belaui.sh && sh update_belaui.sh`
-	  update_result += "belaUI "
-	end
+      update_result += "belaUI "
+    end
   else
     `chmod +x update_belaui.sh && sh update_belaui.sh`
-	update_result += "belaUI "
+    update_result += "belaUI "
   end
-  `chmod +x update_srtla.sh && sh update_srtla.sh`
+  if(File.file?('../srtla/version.json'))
+    srtla_version_remote = JSON.parse Net::HTTP.get_response(URI.parse(('https://raw.githubusercontent.com/moo-the-cow/srtla/main/version.json'))).body
+    srtla_version_local = JSON.parse open('../srtla/version.json').read
+    if(srtla_version_local != srtla_version_remote)
+      `chmod +x update_srtla.sh && sh update_srtla.sh`
+      update_result += "srtla "
+    end
+  else
+    `chmod +x update_srtla.sh && sh update_srtla.sh`
+    update_result += "belacoder "
+  end
   if(update_result == "")
     update_result = "no updates available"
   else
