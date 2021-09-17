@@ -204,6 +204,10 @@ var tempChart = new Chart(
 );
 /** Graph methods **/
 $.getJSON("/data", function(data) {
+	data.versions.forEach((item, index) => {
+		$("#version_"+item.version_name).html(item.version_name+"<br/>"+item.version_value);
+	});
+	
 	data.modems.forEach((item, index) => {
 		let txb = 0;
 		//R1=item.rxb
@@ -245,6 +249,7 @@ $.getJSON("/data", function(data) {
 	tempChart.update();
 	
 	setInterval(function(){
+		
 		$.getJSON("/data", function(data) {
 			data.modems.forEach((item, index) => {
 			let txb = 0;
