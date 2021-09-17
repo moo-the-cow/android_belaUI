@@ -147,7 +147,7 @@ def update_bela()
     belacoder_version_local = JSON.parse open('../belacoder/version.json').read
     if(belacoder_version_local != belacoder_version_remote)
       `chmod +x update_belacoder.sh && sh update_belacoder.sh`
-      update_result += "belacoder (#{belacoder_version_remote}) "
+      update_result += "belacoder (#{belacoder_version_local} to #{belacoder_version_remote}) "
     end
   else
     `chmod +x update_belacoder.sh && sh update_belacoder.sh`
@@ -158,7 +158,7 @@ def update_bela()
     belaui_version_local = JSON.parse open('version.json').read
     if(belaui_version_local != belaui_version_remote)
       `chmod +x update_belaui.sh && sh update_belaui.sh`
-      update_result += "belaUI (#{belaui_version_remote}) "
+      update_result += "belaUI (#{belaui_version_local} to #{belaui_version_remote}) "
     end
   else
     `chmod +x update_belaui.sh && sh update_belaui.sh`
@@ -169,7 +169,7 @@ def update_bela()
     srtla_version_local = JSON.parse open('../srtla/version.json').read
     if(srtla_version_local != srtla_version_remote)
       `chmod +x update_srtla.sh && sh update_srtla.sh`
-      update_result += "srtla (#{belaui_version_remote}) "
+      update_result += "srtla (#{srtla_version_local} to #{belaui_version_remote}) "
     end
   else
     `chmod +x update_srtla.sh && sh update_srtla.sh`
