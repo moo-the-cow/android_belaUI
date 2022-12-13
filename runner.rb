@@ -14,7 +14,7 @@ def gen_ip_file(filename)
 
   addrs = `ip route show`
   addrs.each_line do |line|
-    next if line.match('linkdown')
+    next if (line.match('linkdown') || line.match('default') || line.match('kernel'))
     line = line.split(" ")
     if (srci = in_array(line, 'src')) >= 0
       file.puts(line[srci+1])
