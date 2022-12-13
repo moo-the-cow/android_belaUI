@@ -47,14 +47,15 @@ def get_modems
   addrs = `ip route show`
   addrs.each_line do |line|
     line = line.split(" ")
-    if (srci = in_array(line, 'link src')) >= 0
-      ip = line[srci+1]
+    if (srci = in_array(line, 'link')) >= 0 && in_array(line, 'linkdown') < 0
+      ip = line[srci+2]
       i = line[2]
       rxb = File.read("/sys/class/net/#{i}/statistics/rx_bytes")
-	  txb = File.read("/sys/class/net/#{i}/statistics/tx_bytes")
+          txb = File.read("/sys/class/net/#{i}/statistics/tx_bytes")
       modems.push({:i=>i, :ip=>ip, :txb=>txb.gsub("\n",''), :rxb=>rxb.gsub("\n",'')})
     end
   end
+  modems = modems.uniq
   modems
 end
 
