@@ -46,8 +46,9 @@ def get_modems
 
   addrs = `ip route show`
   addrs.each_line do |line|
+    next if (line.match('linkdown') || line.match('default') || line.match('kernel'))
     line = line.split(" ")
-    if (srci = in_array(line, 'link')) >= 0 && in_array(line, 'linkdown') < 0
+    if (srci = in_array(line, 'link')) >= 0
       ip = line[srci+2]
       i = line[2]
       rxb = File.read("/sys/class/net/#{i}/statistics/rx_bytes")
