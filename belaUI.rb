@@ -46,7 +46,7 @@ def get_modems
 
   addrs = `ip route show`
   addrs.each_line do |line|
-    next if (line.match('linkdown') || line.match('default') || line.match('kernel'))
+    next if (line.match('linkdown') || line.match('default'))
     line = line.split(" ")
     if (srci = in_array(line, 'link')) >= 0
       ip = line[srci+2]
