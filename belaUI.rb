@@ -44,8 +44,9 @@ end
 def get_modems
   modems = []
 
-  addrs = `ifconfig 2> /dev/null | grep 'inet ' | awk '{print $2}' | grep -v '127.0.0.1\|172'`
+  addrs = `ifconfig 2> /dev/null | grep 'inet ' | awk '{print $2}' | grep -v '127\|172'`
   addrs.each_line do |line|
+      next if (line.match('127') || line.match('172'))  
       ip = line
       i = "dev"
       rxb = 0
@@ -284,6 +285,13 @@ post '/start' do
   rescue
     error(400, "failed to resolve SRTLA addr #{params[:srtla_addr]}")
   end
+  print "delay: " + delay
+  print "pipeline: " + params[:pipeline]
+  print "min_br: " + bitrate[0]
+  print "max_br: " + bitrate[1]
+  print "srtla_port: " + srtla_port
+  print "srt_latency: " + srt_latency
+  print "srt_streamid: " + srt_streamid
 
   $config['delay'] = delay
   $config['pipeline'] = params[:pipeline]
