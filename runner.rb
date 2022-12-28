@@ -12,9 +12,9 @@ end
 def gen_ip_file(filename)
   file = File.open(filename, 'w')
 
-  addrs = `ifconfig 2> /dev/null | grep 'inet ' | awk '{print $2}' | grep -v '127.0.0.1\|172'`
+  addrs = `ifconfig 2> /dev/null | grep 'inet ' | awk '{print $2}' | grep -v '127\|172'`
   addrs.each_line do |line|
-    #next if (line.match('linkdown') || line.match('default'))
+    next if (line.match('127') || line.match('172'))
     #line = line.split(" ")
     #if (srci = in_array(line, 'src')) >= 0
       file.puts(line)
