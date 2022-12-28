@@ -47,14 +47,14 @@ def get_modems
   addrs = `ifconfig 2> /dev/null | grep 'inet ' | awk '{print $2}' | grep -v '127.0.0.1\|172'`
   addrs.each_line do |line|
     #next if (line.match('linkdown') || line.match('default') || line.match('docker0'))
-    line = line.split(" ")
-    if (srci = in_array(line, 'link')) >= 0
-      ip = line[srci+2]
-      i = line[2]
+    #line = line.split(" ")
+    #if (srci = in_array(line, 'link')) >= 0
+      ip = line
+      i = "dev"
       rxb = 0
           txb = 0
       modems.push({:i=>i, :ip=>ip, :txb=>txb.gsub("\n",''), :rxb=>rxb.gsub("\n",'')})
-    end
+    #end
   end
   modems = modems.uniq
   modems
