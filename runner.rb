@@ -36,15 +36,15 @@ srtla_send_cmd = [
 
 belacoder_cmd = [
   "#{$setup['belacoder_path']}/belacoder",
-  ARGV[0],                # pipeline
-  "127.0.0.1",            # srtla_send address
-  "9000",                 # srtla_send listening port
   "-d",
   ARGV[1],                # audio delay
   "-b",
   $setup['bitrate_file'], # bitrate limits file
   "-l",
   ARGV[4],                # srt latency
+  ARGV[0],                # pipeline
+  "127.0.0.1",            # srtla_send address
+  "9000",                 # srtla_send listening port
 ]
 
 if ARGV[5] and ARGV[5].length > 0
