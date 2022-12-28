@@ -42,21 +42,16 @@ belacoder_cmd = [
   $setup['bitrate_file'], # bitrate limits file
   "-l",
   ARGV[4],                # srt latency
-  ARGV[0],                # pipeline
-  "127.0.0.1",            # srtla_send address
-  "9000",                 # srtla_send listening port
 ]
 
 if ARGV[5] and ARGV[5].length > 0
   # append -s streamid
   belacoder_cmd.push("-s")
   belacoder_cmd.push(ARGV[5])
-  print "moooooo\n"
-  print "#{ARGV[0]}\n"
-  print "#{ARGV[1]}\n"
-  print "#{ARGV[4]}\n"
-  print "#{ARGV[5]}\n"
 end
+belacoder_cmd.push(ARGV[0])                # pipeline
+belacoder_cmd.push("127.0.0.1")            # srtla_send address
+belacoder_cmd.push(9000)                 # srtla_send listening port
 
 fork do
   while true do
