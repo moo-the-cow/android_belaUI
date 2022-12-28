@@ -79,13 +79,13 @@ end
 def get_power
   power = []
   power_name = 'Volt'
-  power_value = `cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage0_input | tr -d '\n'`
+  power_value = 0#`cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_voltage0_input | tr -d '\n'`
   power.push({:id=>0, :power_name=>power_name, :power_value=>power_value})
   power_name = 'Ampere'
-  power_value = `cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_current0_input | tr -d '\n'`
+  power_value = 0#`cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_current0_input | tr -d '\n'`
   power.push({:id=>1, :power_name=>power_name, :power_value=>power_value})
   power_name = 'Watt'
-  power_value = `cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power0_input | tr -d '\n'`
+  power_value = 0#`cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power0_input | tr -d '\n'`
   power.push({:id=>2, :power_name=>power_name, :power_value=>power_value})
   power
 end
@@ -93,13 +93,13 @@ end
 def get_versions
   versions = []
   version_name = 'BelaUI'
-  version_value = `USERNAME=\`id -un 1000\` && cat /home/$USERNAME/belaUI/version.json | tr -d '\n'`
+  version_value = `USERNAME=\`id -un 1000\` && cat version.json | tr -d '\n'`
   versions.push({:id=>0, :version_name=>version_name, :version_value=>version_value})
   version_name = 'Belacoder'
-  version_value = `USERNAME=\`id -un 1000\` && cat /home/$USERNAME/belacoder/version.json | tr -d '\n'`
+  version_value = `USERNAME=\`id -un 1000\` && cat ../belacoder/version.json | tr -d '\n'`
   versions.push({:id=>1, :version_name=>version_name, :version_value=>version_value})
   version_name = 'SRTLA'
-  version_value = `USERNAME=\`id -un 1000\` && cat /home/$USERNAME/srtla/version.json | tr -d '\n'`
+  version_value = `USERNAME=\`id -un 1000\` && cat ../srtla/version.json | tr -d '\n'`
   versions.push({:id=>2, :version_name=>version_name, :version_value=>version_value})
   versions
 end
