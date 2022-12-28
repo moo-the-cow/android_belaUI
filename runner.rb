@@ -51,7 +51,7 @@ if ARGV[5] and ARGV[5].length > 0
 end
 belacoder_cmd.push(ARGV[0])                # pipeline
 belacoder_cmd.push("127.0.0.1")            # srtla_send address
-belacoder_cmd.push(9000)                 # srtla_send listening port
+belacoder_cmd.push("9000")                 # srtla_send listening port
 
 fork do
   while true do
