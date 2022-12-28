@@ -212,7 +212,7 @@ get '/update' do
 end
 
 get '/data' do
-  all_data = { :active=>is_active, :modems=>get_modems, :temps=>get_temps, :power=>get_power, :versions=>get_versions}
+  all_data = { :active=>is_active, :modems=>get_modems, :versions=>get_versions}
   json all_data
 end
 
