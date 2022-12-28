@@ -285,13 +285,13 @@ post '/start' do
   rescue
     error(400, "failed to resolve SRTLA addr #{params[:srtla_addr]}")
   end
-  print "delay: #{delay}"
-  print "pipeline: #{params[:pipeline]}"
-  print "min_br: #{bitrate[0]}"
-  print "max_br: #{bitrate[1]}"
-  print "srtla_port: #{srtla_port}"
-  print "srt_latency: #{srt_latency}"
-  print "srt_streamid: #{srt_streamid}"
+  print "\ndelay: #{delay}\n"
+  print "pipeline: #{params[:pipeline]}\n"
+  print "min_br: #{bitrate[0]}\n"
+  print "max_br: #{bitrate[1]}\n"
+  print "srtla_port: #{srtla_port}\n"
+  print "srt_latency: #{srt_latency}\n"
+  print "srt_streamid: #{srt_streamid}\n"
 
   $config['delay'] = delay
   $config['pipeline'] = params[:pipeline]
