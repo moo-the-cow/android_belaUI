@@ -289,6 +289,7 @@ post '/start' do
   print "pipeline: #{params[:pipeline]}\n"
   print "min_br: #{bitrate[0]}\n"
   print "max_br: #{bitrate[1]}\n"
+  print "srtla_addr: #{srtla_addr}\n"
   print "srtla_port: #{srtla_port}\n"
   print "srt_latency: #{srt_latency}\n"
   print "srt_streamid: #{srt_streamid}\n"
