@@ -103,7 +103,8 @@ end
 
 def get_pipelines()
   pipelines = []
-  pipelines += Dir["#{$setup['belacoder_path']}/pipeline/jetson/*"].sort if $setup['hw'] == 'jetson'
+  pipelines += Dir["#{$setup['belacoder_path']}/pipeline/android/*"].sort if $setup['hw'] == 'android'
+  pipelines += Dir["#{$setup['belacoder_path']}/pipeline/jetson/*"].sort  if $setup['hw'] == 'jetson'
   pipelines += Dir["#{$setup['belacoder_path']}/pipeline/generic/*"].sort
   pipelines.each do |pipelineFile|
 	text = File.read(pipelineFile)
