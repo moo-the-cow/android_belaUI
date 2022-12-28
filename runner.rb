@@ -63,6 +63,7 @@ fork do
 end
 
 while true do
+  print "#{belacoder_cmd}"
   belacoder_proc = IO.popen(belacoder_cmd)
   Process.wait(belacoder_proc.pid)
 
